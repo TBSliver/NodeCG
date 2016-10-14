@@ -3,19 +3,19 @@
 <link rel="import" href="/components/paper-button/paper-button.html">
 
 <dom-module id="ncg-single-instance">
-	<style>
-		:host {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			margin-bottom: 8px;
-		}
-	</style>
-
 	<template>
+		<style>
+			:host {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 8px;
+			}
+		</style>
+
 		<span>{{url}}</span>
 		<paper-button class="nodecg-danger" on-click="kill">KILL</paper-button>
 	</template>
-</dom-module>
 
-<script src="/dashboard/elements/ncg-single-instance.js"></script>
+	<script src="/dashboard/elements/ncg-single-instance.js"></script>
+</dom-module>

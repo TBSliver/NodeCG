@@ -1,5 +1,5 @@
-<link rel="import" href="/components/polymer/polymer.html">
 <link rel="import" href="/components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/components/iron-icons/av-icons.html">
 <link rel="import" href="/components/paper-slider/paper-slider.html">
 <link rel="import" href="/components/paper-styles/typography.html">
 
@@ -8,32 +8,64 @@
 		<style>
 			:host {
 				@apply(--layout-horizontal);
+				@apply(--layout-center);
 				align-items: center;
+			}
+
+
+			#previewButton {
+				background-color: #00bebe;
+				color: white;
+				min-width: 40px;
+				height: 40px;
+				padding: 0;
+				margin-left: 0;
+				margin-right: 8px;
+			}
+
+			#previewButton-icon {
+				width: 30px;
+				height: 30px;
 			}
 
 			#name {
 				@apply(--paper-font-title);
-				@apply(--layout-flex);
 				overflow: hidden;
 				text-overflow: ellipsis;
+				min-width: 128px;
 			}
 
 			#select {
 				display: none;
 				width: 150px;
-				@apply(--layout-flex-none);
+				min-width: 128px;
+				flex-shrink: 1;
+				flex-grow: 0;
+				margin-bottom: 6px;
 			}
 
-			paper-slider {
-				@apply(--layout-flex-none);
+			#slider {
+				flex-grow: 0;
+				flex-shrink: 1;
+				min-width: 128px;
 				--paper-slider-input: {
 					width: 80px;
-				}
+				};
+				--paper-input-container-underline: {
+					margin-right: 15px;
+				};
 			}
 		</style>
 
-		<span id="name">[[name]]</span>
-		<select id="select" on-change="_retargetFile"></select>
+		<paper-button id="previewButton" raised on-tap="playPreview">
+			<iron-icon id="previewButton-icon" icon="av:play-arrow"></iron-icon>
+		</paper-button>
+
+		<div class="layout vertical flex">
+			<span id="name" title="[[name]]">[[name]]</span>
+			<select id="select" on-change="_retargetFile"></select>
+		</div>
+
 		<paper-slider id="slider" min="0" max="100" step="1" on-change="_onSliderChange" editable></paper-slider>
 	</template>
 

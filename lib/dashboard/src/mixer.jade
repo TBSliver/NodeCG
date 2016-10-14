@@ -1,26 +1,30 @@
 style(is="custom-style").
-	#mixer-masterCard {
-		background-color: rgb(0, 112, 112);
+	#mixer-topCard {
 		color: white;
-		margin-bottom: 16px;
+		background-color: #00bebe;
+		margin-bottom: 0;
 	}
 
-	#mixer-masterCard .card-content {
-		@apply(--layout-horizontal);
-		align-items: center;
-	}
-
-	#mixer-masterCard span {
+	#mixer-topCard span,
+	#mixer-masterFaderCard span {
 		@apply(--paper-font-display1);
-		@apply(--layout-flex);
-		font-size: 28px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 
+	#mixer-masterFaderCard {
+		background-color: #007070;
+		color: white;
+		margin-bottom: 16px;
+	}
+
+	#soundTestDialogOpenButton {
+		color: black;
+		background-color: white;
+	}
+
 	#masterFader {
 		width: 250px;
-		@apply(--layout-flex-none);
 		--paper-slider-active-color: white;
 		--paper-slider-knob-color: white;
 		--paper-input-container-focus-color: var(--google-blue-700);
@@ -31,12 +35,35 @@ style(is="custom-style").
 		};
 	}
 
+	#soundTestDialog {
+		max-width: 492px;
+	}
 
-paper-card.ncg-card#mixer-masterCard
-	.card-content
-		span Master Fader
-		paper-slider#masterFader(min="0" max="100" step="1" editable)
+paper-card.ncg-card#mixer-topCard
+	.card-content.layout.horizontal.center
+		span.flex(style="font-size: 32px;") Audio Mixer
+		paper-button#soundTestDialogOpenButton(raised, onclick="soundTestDialog.open();") Sound Test
+
+paper-card.ncg-card#mixer-masterFaderCard
+	.card-content.layout.horizontal.center
+		span.flex(style="font-size: 28px;") Master Fader
+		paper-slider#masterFader.flex-none(min="0" max="100" step="1" editable)
 
 each bundle in bundles
 	if (bundle.soundCues && bundle.soundCues.length > 0)
 		ncg-sounds(bundle-name=bundle.name)
+
+paper-dialog#soundTestDialog(with-backdrop)
+	h2 Sound Test
+	div
+		p.paper-font-body1
+			| To perform a full test of your sound setup inside your
+			| production pipline, place the graphic linked by the buttons
+			| below in your Stream setup, and use the preview buttons
+			| on the Mixer panel.
+	.buttons
+		paper-button(dialog-confirm) Copy URL
+		paper-button(dialog-confirm) Open In New Tab
+		paper-button(dialog-dismiss) Close
+
+
