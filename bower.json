@@ -79,5 +79,8 @@
     "iron-icon": "^2.0.0",
     "iron-iconset-svg": "^2.0.0",
     "paper-ripple": "^2.0.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "^6.0.0"
   }
 }

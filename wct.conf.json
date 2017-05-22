@@ -1,0 +1,17 @@
+{
+	"verbose": true,
+	"plugins": {
+		"local": {
+			"browsers": ["chrome"]
+		},
+		"istanbul": {
+			"dir": "./coverage",
+			"reporters": ["text-summary", "lcov"],
+			"include": [
+				"lib/dashboard/public/elements/assets/ncg-asset-file.html",
+				"lib/dashboard/public/elements/assets/ncg-asset-file.js"
+			],
+			"exclude": []
+		}
+	}
+}
