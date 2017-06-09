@@ -22,7 +22,9 @@
 			}
 
 			.collectionName {
-				margin-top: 0;
+				display: block;
+				font-size: 2em;
+				font-weight: bold;
 			}
 
 			paper-card {
@@ -38,7 +40,7 @@
 		<template is="dom-repeat" items="[[collections]]" as="collection">
 			<paper-card>
 				<div class="card-content">
-					<h2 class="collectionName">[[collection.name]]</h2>
+					<div class="collectionName">[[collection.name]]</div>
 
 					<template is="dom-repeat" items="[[collection.categories]]" as="category" mutable-data>
 						<ncg-asset-category

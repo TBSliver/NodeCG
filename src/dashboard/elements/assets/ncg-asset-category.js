@@ -34,6 +34,17 @@ class NcgAssetCategory extends Polymer.MutableData(Polymer.Element) {
 		});
 	}
 
+	connectedCallback() {
+		super.connectedCallback();
+		this.$.uploadDialog.fitInto = document.body.querySelector('ncg-dashboard').shadowRoot.getElementById('pages');
+		this.$.uploadDialog.resetFit();
+	}
+
+	refitUploadDialog() {
+		console.log('fit');
+		this.$.uploadDialog.refit();
+	}
+
 	_onAllowedTypesChanged(allowedTypes) {
 		const prefixed = allowedTypes.map(type => '.' + type);
 		this.$.uploader.accept = prefixed.join(',');
@@ -79,6 +90,7 @@ class NcgAssetCategory extends Polymer.MutableData(Polymer.Element) {
 	}
 
 	_onFileReject(event) {
+		this.refitUploadDialog();
 		this.$.toast.text = `${event.detail.file.name} error: ${event.detail.error}`;
 		this.$.toast.open();
 	}

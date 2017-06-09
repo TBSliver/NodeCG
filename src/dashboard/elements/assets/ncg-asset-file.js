@@ -25,7 +25,6 @@ class NcgAssetFile extends Polymer.Element {
 			method: 'DELETE',
 			credentials: 'include'
 		}).then(response => {
-			console.log(response);
 			if (response.status === 410 || response.status === 200) {
 				this.dispatchEvent(new CustomEvent('deleted', {bubbles: true, composed: true}));
 			} else {
@@ -33,8 +32,6 @@ class NcgAssetFile extends Polymer.Element {
 			}
 
 			this.deleting = false;
-		}).catch(error => {
-			console.log(error);
 		});
 	}
 }
