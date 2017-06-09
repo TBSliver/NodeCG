@@ -3,10 +3,11 @@
 <link rel="import" href="../../../../bower_components/nodecg-replicant/nodecg-replicant.html">
 <link rel="import" href="../../../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
 <link rel="import" href="../../../../bower_components/vaadin-upload/vaadin-upload.html">
 <link rel="import" href="ncg-asset-file.html">
 
-<dom-module id="ncg-asset-group">
+<dom-module id="ncg-asset-category">
 	<template>
 		<style>
 			:host {
@@ -59,13 +60,13 @@
 
 		<nodecg-replicant
 			id="replicant"
-			replicant-name="assets:[[categoryName]]"
-			replicant-bundle="[[bundleName]]"
+			replicant-name="assets:[[category.name]]"
+			replicant-bundle="[[collectionName]]"
 		  	value="{{files}}"></nodecg-replicant>
 		<paper-toast id="toast"></paper-toast>
 
 		<div id="header">
-			<span id="title">[[categoryTitle]]</span>
+			<span id="title">[[category.title]]</span>
 			<paper-button id="add" raised on-click="openUploadDialog">
 				<iron-icon icon="add"></iron-icon>
 				Add File(s)
@@ -73,7 +74,7 @@
 		</div>
 
 		<div id="files">
-			<template is="dom-repeat" items="[[files]]" as="file">
+			<template is="dom-repeat" items="[[files]]" as="file" mutable-data>
 				<ncg-asset-file
 					file="[[file]]"
 				   	on-deleted="_handleDeleted"
@@ -89,11 +90,11 @@
 		<paper-dialog id="uploadDialog">
 			<vaadin-upload
 				id="uploader"
-				target="/assets/[[bundleName]]/[[categoryName]]"
+				target="/assets/[[collectionName]]/[[category.name]]"
 			   	on-upload-before="_onUploadBefore"
 				on-file-reject="_onFileReject">
 
-				<template is="dom-if" if="[[allowedTypes.length]]">
+				<template is="dom-if" if="[[category.allowedTypes.length]]">
 					<div id="acceptsMsg">[[acceptsMsg]]</div>
 				</template>
 			</vaadin-upload>
@@ -104,5 +105,5 @@
 		</paper-dialog>
 	</template>
 
-	<script src="ncg-asset-group.js"></script>
+	<script src="ncg-asset-category.js"></script>
 </dom-module>

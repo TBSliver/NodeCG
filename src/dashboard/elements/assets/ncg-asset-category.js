@@ -1,29 +1,31 @@
-class NcgAssetGroup extends Polymer.Element {
+class NcgAssetCategory extends Polymer.MutableData(Polymer.Element) {
 	static get is() {
-		return 'ncg-asset-group';
+		return 'ncg-asset-category';
 	}
 
 	static get properties() {
 		return {
 			files: Array,
-			bundleName: String,
-			categoryName: String,
-			categoryTitle: String,
-			allowedTypes: {
-				type: Array,
-				observer: '_onAllowedTypesChanged'
-			},
+			collectionName: String,
+			category: Object,
 			acceptsMsg: {
 				type: String,
-				computed: '_computeAcceptsMsg(allowedTypes)'
+				computed: '_computeAcceptsMsg(category.allowedTypes)'
 			}
 		};
+	}
+
+	static get observers() {
+		return [
+			'_onAllowedTypesChanged(category.allowedTypes)'
+		];
 	}
 
 	ready() {
 		super.ready();
 
 		this.$.replicant.addEventListener('change', e => {
+			console.log(e.detail);
 			if (Array.isArray(e.detail.newVal) && e.detail.newVal.length > 0) {
 				this.$.empty.style.display = 'none';
 			} else {
@@ -82,4 +84,4 @@ class NcgAssetGroup extends Polymer.Element {
 	}
 }
 
-customElements.define('ncg-asset-group', NcgAssetGroup);
+customElements.define(NcgAssetCategory.is, NcgAssetCategory);

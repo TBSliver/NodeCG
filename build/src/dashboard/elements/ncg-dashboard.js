@@ -40,6 +40,10 @@
 							route: 'graphics',
 							icon: 'visibility'
 						}, {
+							name: 'Media Player',
+							route: 'media',
+							icon: 'av:play-arrow'
+						}, {
 							name: 'Mixer',
 							route: 'mixer',
 							icon: 'av:volume-up'

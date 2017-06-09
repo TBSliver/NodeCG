@@ -1,0 +1,70 @@
+<link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+
+<style>
+	paper-dialog-scrollable #scrollable::-webkit-scrollbar {
+		width: 11px;
+	}
+
+	paper-dialog-scrollable #scrollable::-webkit-scrollbar-track {
+		background: white;
+		box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
+	}
+
+	paper-dialog-scrollable #scrollable::-webkit-scrollbar-thumb {
+		background: #7D7D7D;
+		border-radius: 5px;
+		box-shadow: inset 0 0 5px rgba(0,0,0,0.75);
+	}
+
+	paper-dialog-scrollable #scrollable::-webkit-scrollbar-thumb:window-inactive {
+		background: #b9b9b9;
+	}
+</style>
+
+<dom-module id="ncg-media-list">
+	<template>
+		<style>
+			:host {
+				width: 100%;
+				height: 330px;
+				background: #F2F2F2;
+				border: 1px solid black;
+				box-sizing: border-box;
+				@apply --layout-vertical;
+			}
+
+			#scrollContainer {
+				width: 100%;
+				@apply --layout-flex;
+				--paper-dialog-scrollable: {
+					padding: 0;
+				}
+			}
+
+			#list {
+				display: block;
+				width: 100%;
+			}
+
+			.spacer {
+				height: 9px;
+				flex-shrink: 0;
+			}
+		</style>
+
+		<div class="spacer"></div>
+		<paper-dialog-scrollable id="scrollContainer">
+			<iron-selector
+				id="list"
+				attr-for-selected="[[attrForSelected]]"
+				fallback-selection="[[fallbackSelection]]"
+				selectable="[[selectable]]">
+				<slot></slot>
+			</iron-selector>
+		</paper-dialog-scrollable>
+		<div class="spacer"></div>
+	</template>
+
+	<script src="ncg-media-list.js"></script>
+</dom-module>
