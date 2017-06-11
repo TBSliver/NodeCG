@@ -25,13 +25,22 @@ class NcgAssetCategory extends Polymer.MutableData(Polymer.Element) {
 		super.ready();
 
 		this.$.replicant.addEventListener('change', e => {
-			console.log(e.detail);
 			if (Array.isArray(e.detail.newVal) && e.detail.newVal.length > 0) {
 				this.$.empty.style.display = 'none';
 			} else {
 				this.$.empty.style.display = 'block';
 			}
 		});
+	}
+
+	connectedCallback() {
+		super.connectedCallback();
+		this.$.uploadDialog.fitInto = document.body.querySelector('ncg-dashboard').shadowRoot.getElementById('pages');
+		this.$.uploadDialog.resetFit();
+	}
+
+	refitUploadDialog() {
+		this.$.uploadDialog.refit();
 	}
 
 	_onAllowedTypesChanged(allowedTypes) {
@@ -70,6 +79,7 @@ class NcgAssetCategory extends Polymer.MutableData(Polymer.Element) {
 
 	openUploadDialog() {
 		this.$.uploadDialog.open();
+		this.refitUploadDialog();
 	}
 
 	_onUploadBefore(event) {
@@ -79,6 +89,7 @@ class NcgAssetCategory extends Polymer.MutableData(Polymer.Element) {
 	}
 
 	_onFileReject(event) {
+		this.refitUploadDialog();
 		this.$.toast.text = `${event.detail.file.name} error: ${event.detail.error}`;
 		this.$.toast.open();
 	}

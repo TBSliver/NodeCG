@@ -7,6 +7,7 @@
 <link rel="import" href="../../../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
 <link rel="import" href="../../../../bower_components/vaadin-upload/vaadin-upload.html">
+<link rel="import" href="../util-scrollable.html">
 <link rel="import" href="ncg-asset-file.html">
 
 <dom-module id="ncg-asset-category">
@@ -39,6 +40,10 @@
 			}
 
 			#files {
+				max-height: 400px;
+				--util-scrollable: {
+					padding: 0;
+				};
 				@apply --layout-vertical;
 			}
 
@@ -65,6 +70,7 @@
 			replicant-name="assets:[[category.name]]"
 			replicant-bundle="[[collectionName]]"
 		  	value="{{files}}"></nodecg-replicant>
+
 		<paper-toast id="toast"></paper-toast>
 
 		<div id="header">
@@ -75,14 +81,14 @@
 			</paper-button>
 		</div>
 
-		<div id="files">
+		<util-scrollable id="files">
 			<template is="dom-repeat" items="[[files]]" as="file" mutable-data>
 				<ncg-asset-file
 					file="[[file]]"
-				   	on-deleted="_handleDeleted"
-				   	on-deletion-failed="_handleDeletionFailed"></ncg-asset-file>
+					on-deleted="_handleDeleted"
+					on-deletion-failed="_handleDeletionFailed"></ncg-asset-file>
 			</template>
-		</div>
+		</util-scrollable>
 
 		<div id="empty">
 			There are no assets in this category.

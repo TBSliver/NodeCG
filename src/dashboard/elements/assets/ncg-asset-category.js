@@ -25,7 +25,6 @@ class NcgAssetCategory extends Polymer.MutableData(Polymer.Element) {
 		super.ready();
 
 		this.$.replicant.addEventListener('change', e => {
-			console.log(e.detail);
 			if (Array.isArray(e.detail.newVal) && e.detail.newVal.length > 0) {
 				this.$.empty.style.display = 'none';
 			} else {
@@ -41,7 +40,6 @@ class NcgAssetCategory extends Polymer.MutableData(Polymer.Element) {
 	}
 
 	refitUploadDialog() {
-		console.log('fit');
 		this.$.uploadDialog.refit();
 	}
 
@@ -81,6 +79,7 @@ class NcgAssetCategory extends Polymer.MutableData(Polymer.Element) {
 
 	openUploadDialog() {
 		this.$.uploadDialog.open();
+		this.refitUploadDialog();
 	}
 
 	_onUploadBefore(event) {

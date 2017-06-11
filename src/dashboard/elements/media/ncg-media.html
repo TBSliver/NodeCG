@@ -55,6 +55,12 @@
 			}
 		</style>
 
+		<nodecg-replicant
+			id="replicant"
+			replicant-name="assets:media"
+			replicant-bundle="NodeCG"
+			value="{{files}}"></nodecg-replicant>
+
 		<div id="leftColumn" class="column">
 			<div id="preview"></div>
 
@@ -64,12 +70,12 @@
 
 			<ncg-media-list>
 				<template
-					id="presetRepeat"
+					id="filesRepeat"
 					is="dom-repeat"
-					items="[[presets]]"
-					as="preset"
-					filter="_filterPresets"
-					sort="_sortPresets">
+					items="[[files]]"
+					as="file"
+					filter="_filterFiles"
+					sort="_sortFiles">
 					<lowerthird-preset
 						preset="[[preset]]"
 						data-name$="[[preset.name]]"
